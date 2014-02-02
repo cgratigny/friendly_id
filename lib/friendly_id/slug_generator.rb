@@ -55,7 +55,7 @@ module FriendlyId
 
       pkey  = sluggable_class.primary_key
       value = sluggable.send pkey
-      base = "#{column} = ? OR #{column} LIKE ?"
+      base = "#{column} = ?"
       # Awful hack for SQLite3, which does not pick up '\' as the escape character without this.
       base << "ESCAPE '\\'" if sluggable.connection.adapter_name =~ /sqlite/i
       scope = sluggable_class.unscoped.where(base, normalized)
